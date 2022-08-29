@@ -8,7 +8,7 @@ module hm_enc( input wire [3:0] in, output wire[6:0] out);
    assign out[6] = in[3];
 endmodule // hm_enc
 
-module user_module_hm
+module user_module_hamming74
   (
    input wire [7:0]  io_in,
    output wire [7:0] io_out
