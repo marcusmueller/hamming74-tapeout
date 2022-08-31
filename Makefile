@@ -19,3 +19,17 @@ harden:
 	$(OPENLANE_IMAGE_NAME) \
 	/bin/bash -c "./flow.tcl -overwrite -design /work/src -run_path /work/runs -tag wokwi"
 
+simulation: src/hamming74_top.cc src/simulation.cc
+	$(CXX) -std=c++20 \
+         -Wall -Wpedantic \
+         -I `yosys-config --datdir`/include -I /usr/include/yosys \
+         -o simulation \
+         -lfmt \
+         src/simulation.cc
+
+src/hamming74_top.cc: src/user_module_hamming74.v
+	echo "read_verilog src/user_module_hamming74.v; write_cxxrtl src/hamming74_top.cc" | yosys
+
+simulate: simulation
+	./simulation
+.PHONY: simulate

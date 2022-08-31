@@ -1,1 +1,3 @@
 src/config.tcl
+simulation
+src/hamming74_top.cc
